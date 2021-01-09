@@ -1,0 +1,1 @@
+json.partial! "formula_contraindications/formula_contraindication", formula_contraindication: @formula_contraindication
