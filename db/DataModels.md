@@ -59,11 +59,15 @@ bundle exec rails g scaffold formula_herb_action formula_herb:references formula
 
 bundle exec rails g scaffold formula_action formula:references formula_named_action:references
 
-bundle exec rails g scaffold syndrome name:index:uniq
+bundle exec rails g scaffold syndrome name:string:index:uniq
 
 bundle exec rails g scaffold formula_syndrome formula:references syndrome:references
 
 bundle exec rails g scaffold formula_modification_set formula:references purpose:string:index
 
 bundle exec rails g scaffold formula_modification formula_modification_set:references herb:references modification:string
+
+bundle exec rails g scaffold herb_warning_type name:string:index:uniq
+
+bundle exec rails g scaffold herb_warning herb_warning_type:references warning:string 
 ```

@@ -5,4 +5,8 @@ class HerbDosage < ApplicationRecord
   validates :herb, presence: true
   validates :herb_dosage_type, presence: true
   validates :dosage, presence: true
+
+  def dosage_type
+    herb_dosage_type.name
+  end
 end

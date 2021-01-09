@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_01_09_052334) do
+ActiveRecord::Schema.define(version: 2021_01_09_191217) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -273,6 +273,23 @@ ActiveRecord::Schema.define(version: 2021_01_09_052334) do
     t.index ["name"], name: "index_herb_property_types_on_name"
   end
 
+  create_table "herb_warning_types", force: :cascade do |t|
+    t.string "name", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["name"], name: "index_herb_warning_types_on_name"
+  end
+
+  create_table "herb_warnings", force: :cascade do |t|
+    t.bigint "herb_id", null: false
+    t.bigint "herb_warning_type_id", null: false
+    t.string "warning", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["herb_id"], name: "index_herb_warnings_on_herb_id"
+    t.index ["herb_warning_type_id"], name: "index_herb_warnings_on_herb_warning_type_id"
+  end
+
   create_table "herbs", force: :cascade do |t|
     t.string "name", null: false
     t.bigint "herb_category_id", null: false
@@ -369,5 +386,7 @@ ActiveRecord::Schema.define(version: 2021_01_09_052334) do
   add_foreign_key "herb_properties", "herb_property_types"
   add_foreign_key "herb_properties", "herbs"
   add_foreign_key "herb_properties", "precedence_types"
+  add_foreign_key "herb_warnings", "herb_warning_types"
+  add_foreign_key "herb_warnings", "herbs"
   add_foreign_key "herbs", "herb_categories"
 end

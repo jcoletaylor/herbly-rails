@@ -7,4 +7,12 @@ class HerbProperty < ApplicationRecord
   validates :herb_property_type, presence: true
   validates :precedence_type, presence: true
   validates :property, presence: true
+
+  def property_type
+    herb_property_type.name
+  end
+
+  def precedence
+    precedence_type.name
+  end
 end

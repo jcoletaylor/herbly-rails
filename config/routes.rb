@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  resources :herb_warnings
+  resources :herb_warning_types
   mount Rswag::Ui::Engine => '/api-docs'
   mount Rswag::Api::Engine => '/api-docs'
   resources :herb_dosages

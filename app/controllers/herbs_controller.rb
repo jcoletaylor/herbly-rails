@@ -7,6 +7,8 @@ class HerbsController < AuthenticatedController
   def index
     @herbs = Herb
       .includes(:herb_category)
+      .includes(herb_properties: [:precedence_type, :herb_property_type])
+      .includes(herb_dosages: [:herb_dosage_type])
       .all
   end
 
@@ -46,7 +48,11 @@ class HerbsController < AuthenticatedController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_herb
-      @herb = Herb.includes(:herb_category).find(params[:id])
+      @herb = Herb
+        .includes(:herb_category)
+        .includes(herb_properties: [:precedence_type, :herb_property_type])
+        .includes(herb_dosages: [:herb_dosage_type])
+        .find(params[:id])
     end
 
     # Only allow a list of trusted parameters through.
