@@ -1,4 +1,4 @@
 require_relative 'loader/loader'
 
-loader = Loader.new
+loader = Loader::Main.new
 loader.load
