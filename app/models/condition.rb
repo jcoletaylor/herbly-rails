@@ -1,3 +1,16 @@
+# == Schema Information
+#
+# Table name: conditions
+#
+#  id         :bigint           not null, primary key
+#  name       :string           not null
+#  created_at :datetime         not null
+#  updated_at :datetime         not null
+#
+# Indexes
+#
+#  index_conditions_on_name  (name)
+#
 class Condition < ApplicationRecord
     has_many :formula_conditions
     has_many :formulas, through: :formula_conditions
