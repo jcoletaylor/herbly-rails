@@ -1,0 +1,1513 @@
+{
+  "version": 2,
+  "tables": [
+    {
+      "table": {
+        "schema": "public",
+        "name": "conditions"
+      },
+      "array_relationships": [
+        {
+          "name": "formula_conditions",
+          "using": {
+            "foreign_key_constraint_on": {
+              "column": "condition_id",
+              "table": {
+                "schema": "public",
+                "name": "formula_conditions"
+              }
+            }
+          }
+        }
+      ],
+      "select_permissions": [
+        {
+          "role": "anonymous",
+          "permission": {
+            "columns": [
+              "id",
+              "name",
+              "created_at",
+              "updated_at"
+            ],
+            "filter": {},
+            "allow_aggregations": true
+          }
+        }
+      ]
+    },
+    {
+      "table": {
+        "schema": "public",
+        "name": "formula_actions"
+      },
+      "object_relationships": [
+        {
+          "name": "formula",
+          "using": {
+            "foreign_key_constraint_on": "formula_id"
+          }
+        },
+        {
+          "name": "formula_named_action",
+          "using": {
+            "foreign_key_constraint_on": "formula_named_action_id"
+          }
+        }
+      ],
+      "select_permissions": [
+        {
+          "role": "anonymous",
+          "permission": {
+            "columns": [
+              "id",
+              "formula_id",
+              "formula_named_action_id",
+              "created_at",
+              "updated_at"
+            ],
+            "filter": {},
+            "allow_aggregations": true
+          }
+        }
+      ]
+    },
+    {
+      "table": {
+        "schema": "public",
+        "name": "formula_also_knowns"
+      },
+      "object_relationships": [
+        {
+          "name": "formula",
+          "using": {
+            "foreign_key_constraint_on": "formula_id"
+          }
+        }
+      ],
+      "select_permissions": [
+        {
+          "role": "anonymous",
+          "permission": {
+            "columns": [
+              "id",
+              "name",
+              "formula_id",
+              "created_at",
+              "updated_at"
+            ],
+            "filter": {},
+            "allow_aggregations": true
+          }
+        }
+      ]
+    },
+    {
+      "table": {
+        "schema": "public",
+        "name": "formula_conditions"
+      },
+      "object_relationships": [
+        {
+          "name": "condition",
+          "using": {
+            "foreign_key_constraint_on": "condition_id"
+          }
+        },
+        {
+          "name": "formula",
+          "using": {
+            "foreign_key_constraint_on": "formula_id"
+          }
+        }
+      ],
+      "select_permissions": [
+        {
+          "role": "anonymous",
+          "permission": {
+            "columns": [
+              "id",
+              "formula_id",
+              "condition_id",
+              "created_at",
+              "updated_at"
+            ],
+            "filter": {},
+            "allow_aggregations": true
+          }
+        }
+      ]
+    },
+    {
+      "table": {
+        "schema": "public",
+        "name": "formula_contraindications"
+      },
+      "object_relationships": [
+        {
+          "name": "formula",
+          "using": {
+            "foreign_key_constraint_on": "formula_id"
+          }
+        }
+      ],
+      "select_permissions": [
+        {
+          "role": "anonymous",
+          "permission": {
+            "columns": [
+              "id",
+              "formula_id",
+              "contraindication",
+              "created_at",
+              "updated_at"
+            ],
+            "filter": {},
+            "allow_aggregations": true
+          }
+        }
+      ]
+    },
+    {
+      "table": {
+        "schema": "public",
+        "name": "formula_herb_actions"
+      },
+      "object_relationships": [
+        {
+          "name": "formula_herb",
+          "using": {
+            "foreign_key_constraint_on": "formula_herb_id"
+          }
+        },
+        {
+          "name": "formula_named_action",
+          "using": {
+            "foreign_key_constraint_on": "formula_named_action_id"
+          }
+        }
+      ],
+      "select_permissions": [
+        {
+          "role": "anonymous",
+          "permission": {
+            "columns": [
+              "id",
+              "formula_herb_id",
+              "formula_named_action_id",
+              "created_at",
+              "updated_at"
+            ],
+            "filter": {},
+            "allow_aggregations": true
+          }
+        }
+      ]
+    },
+    {
+      "table": {
+        "schema": "public",
+        "name": "formula_herbs"
+      },
+      "object_relationships": [
+        {
+          "name": "formula",
+          "using": {
+            "foreign_key_constraint_on": "formula_id"
+          }
+        },
+        {
+          "name": "herb",
+          "using": {
+            "foreign_key_constraint_on": "herb_id"
+          }
+        }
+      ],
+      "array_relationships": [
+        {
+          "name": "formula_herb_actions",
+          "using": {
+            "foreign_key_constraint_on": {
+              "column": "formula_herb_id",
+              "table": {
+                "schema": "public",
+                "name": "formula_herb_actions"
+              }
+            }
+          }
+        }
+      ],
+      "select_permissions": [
+        {
+          "role": "anonymous",
+          "permission": {
+            "columns": [
+              "id",
+              "formula_id",
+              "herb_id",
+              "dosage",
+              "created_at",
+              "updated_at"
+            ],
+            "filter": {},
+            "allow_aggregations": true
+          }
+        }
+      ]
+    },
+    {
+      "table": {
+        "schema": "public",
+        "name": "formula_interactions"
+      },
+      "object_relationships": [
+        {
+          "name": "formula",
+          "using": {
+            "foreign_key_constraint_on": "formula_id"
+          }
+        }
+      ],
+      "select_permissions": [
+        {
+          "role": "anonymous",
+          "permission": {
+            "columns": [
+              "id",
+              "formula_id",
+              "interaction",
+              "created_at",
+              "updated_at"
+            ],
+            "filter": {},
+            "allow_aggregations": true
+          }
+        }
+      ]
+    },
+    {
+      "table": {
+        "schema": "public",
+        "name": "formula_manifestation_symptoms"
+      },
+      "object_relationships": [
+        {
+          "name": "formula_manifestation",
+          "using": {
+            "foreign_key_constraint_on": "formula_manifestation_id"
+          }
+        },
+        {
+          "name": "symptom",
+          "using": {
+            "foreign_key_constraint_on": "symptom_id"
+          }
+        }
+      ],
+      "select_permissions": [
+        {
+          "role": "anonymous",
+          "permission": {
+            "columns": [
+              "id",
+              "formula_manifestation_id",
+              "symptom_id",
+              "created_at",
+              "updated_at"
+            ],
+            "filter": {},
+            "allow_aggregations": true
+          }
+        }
+      ]
+    },
+    {
+      "table": {
+        "schema": "public",
+        "name": "formula_manifestations"
+      },
+      "object_relationships": [
+        {
+          "name": "formula",
+          "using": {
+            "foreign_key_constraint_on": "formula_id"
+          }
+        }
+      ],
+      "array_relationships": [
+        {
+          "name": "formula_manifestation_symptoms",
+          "using": {
+            "foreign_key_constraint_on": {
+              "column": "formula_manifestation_id",
+              "table": {
+                "schema": "public",
+                "name": "formula_manifestation_symptoms"
+              }
+            }
+          }
+        }
+      ],
+      "select_permissions": [
+        {
+          "role": "anonymous",
+          "permission": {
+            "columns": [
+              "id",
+              "formula_id",
+              "tongue",
+              "tongue_coat",
+              "pulse",
+              "created_at",
+              "updated_at"
+            ],
+            "filter": {},
+            "allow_aggregations": true
+          }
+        }
+      ]
+    },
+    {
+      "table": {
+        "schema": "public",
+        "name": "formula_modification_sets"
+      },
+      "object_relationships": [
+        {
+          "name": "formula",
+          "using": {
+            "foreign_key_constraint_on": "formula_id"
+          }
+        }
+      ],
+      "array_relationships": [
+        {
+          "name": "formula_modifications",
+          "using": {
+            "foreign_key_constraint_on": {
+              "column": "formula_modification_set_id",
+              "table": {
+                "schema": "public",
+                "name": "formula_modifications"
+              }
+            }
+          }
+        }
+      ],
+      "select_permissions": [
+        {
+          "role": "anonymous",
+          "permission": {
+            "columns": [
+              "id",
+              "formula_id",
+              "purpose",
+              "created_at",
+              "updated_at"
+            ],
+            "filter": {},
+            "allow_aggregations": true
+          }
+        }
+      ]
+    },
+    {
+      "table": {
+        "schema": "public",
+        "name": "formula_modifications"
+      },
+      "object_relationships": [
+        {
+          "name": "formula_modification_set",
+          "using": {
+            "foreign_key_constraint_on": "formula_modification_set_id"
+          }
+        },
+        {
+          "name": "herb",
+          "using": {
+            "foreign_key_constraint_on": "herb_id"
+          }
+        }
+      ],
+      "select_permissions": [
+        {
+          "role": "anonymous",
+          "permission": {
+            "columns": [
+              "id",
+              "formula_modification_set_id",
+              "herb_id",
+              "modification",
+              "created_at",
+              "updated_at"
+            ],
+            "filter": {},
+            "allow_aggregations": true
+          }
+        }
+      ]
+    },
+    {
+      "table": {
+        "schema": "public",
+        "name": "formula_named_actions"
+      },
+      "array_relationships": [
+        {
+          "name": "formula_actions",
+          "using": {
+            "foreign_key_constraint_on": {
+              "column": "formula_named_action_id",
+              "table": {
+                "schema": "public",
+                "name": "formula_actions"
+              }
+            }
+          }
+        },
+        {
+          "name": "formula_herb_actions",
+          "using": {
+            "foreign_key_constraint_on": {
+              "column": "formula_named_action_id",
+              "table": {
+                "schema": "public",
+                "name": "formula_herb_actions"
+              }
+            }
+          }
+        }
+      ],
+      "select_permissions": [
+        {
+          "role": "anonymous",
+          "permission": {
+            "columns": [
+              "id",
+              "name",
+              "created_at",
+              "updated_at"
+            ],
+            "filter": {},
+            "allow_aggregations": true
+          }
+        }
+      ]
+    },
+    {
+      "table": {
+        "schema": "public",
+        "name": "formula_notes"
+      },
+      "object_relationships": [
+        {
+          "name": "formula",
+          "using": {
+            "foreign_key_constraint_on": "formula_id"
+          }
+        }
+      ],
+      "select_permissions": [
+        {
+          "role": "anonymous",
+          "permission": {
+            "columns": [
+              "id",
+              "formula_id",
+              "note",
+              "created_at",
+              "updated_at"
+            ],
+            "filter": {},
+            "allow_aggregations": true
+          }
+        }
+      ]
+    },
+    {
+      "table": {
+        "schema": "public",
+        "name": "formula_syndromes"
+      },
+      "object_relationships": [
+        {
+          "name": "formula",
+          "using": {
+            "foreign_key_constraint_on": "formula_id"
+          }
+        },
+        {
+          "name": "syndrome",
+          "using": {
+            "foreign_key_constraint_on": "syndrome_id"
+          }
+        }
+      ],
+      "select_permissions": [
+        {
+          "role": "anonymous",
+          "permission": {
+            "columns": [
+              "id",
+              "formula_id",
+              "syndrome_id",
+              "created_at",
+              "updated_at"
+            ],
+            "filter": {},
+            "allow_aggregations": true
+          }
+        }
+      ]
+    },
+    {
+      "table": {
+        "schema": "public",
+        "name": "formulas"
+      },
+      "array_relationships": [
+        {
+          "name": "formula_actions",
+          "using": {
+            "foreign_key_constraint_on": {
+              "column": "formula_id",
+              "table": {
+                "schema": "public",
+                "name": "formula_actions"
+              }
+            }
+          }
+        },
+        {
+          "name": "formula_also_knowns",
+          "using": {
+            "foreign_key_constraint_on": {
+              "column": "formula_id",
+              "table": {
+                "schema": "public",
+                "name": "formula_also_knowns"
+              }
+            }
+          }
+        },
+        {
+          "name": "formula_conditions",
+          "using": {
+            "foreign_key_constraint_on": {
+              "column": "formula_id",
+              "table": {
+                "schema": "public",
+                "name": "formula_conditions"
+              }
+            }
+          }
+        },
+        {
+          "name": "formula_contraindications",
+          "using": {
+            "foreign_key_constraint_on": {
+              "column": "formula_id",
+              "table": {
+                "schema": "public",
+                "name": "formula_contraindications"
+              }
+            }
+          }
+        },
+        {
+          "name": "formula_herbs",
+          "using": {
+            "foreign_key_constraint_on": {
+              "column": "formula_id",
+              "table": {
+                "schema": "public",
+                "name": "formula_herbs"
+              }
+            }
+          }
+        },
+        {
+          "name": "formula_interactions",
+          "using": {
+            "foreign_key_constraint_on": {
+              "column": "formula_id",
+              "table": {
+                "schema": "public",
+                "name": "formula_interactions"
+              }
+            }
+          }
+        },
+        {
+          "name": "formula_manifestations",
+          "using": {
+            "foreign_key_constraint_on": {
+              "column": "formula_id",
+              "table": {
+                "schema": "public",
+                "name": "formula_manifestations"
+              }
+            }
+          }
+        },
+        {
+          "name": "formula_modification_sets",
+          "using": {
+            "foreign_key_constraint_on": {
+              "column": "formula_id",
+              "table": {
+                "schema": "public",
+                "name": "formula_modification_sets"
+              }
+            }
+          }
+        },
+        {
+          "name": "formula_notes",
+          "using": {
+            "foreign_key_constraint_on": {
+              "column": "formula_id",
+              "table": {
+                "schema": "public",
+                "name": "formula_notes"
+              }
+            }
+          }
+        },
+        {
+          "name": "formula_syndromes",
+          "using": {
+            "foreign_key_constraint_on": {
+              "column": "formula_id",
+              "table": {
+                "schema": "public",
+                "name": "formula_syndromes"
+              }
+            }
+          }
+        }
+      ],
+      "select_permissions": [
+        {
+          "role": "anonymous",
+          "permission": {
+            "columns": [
+              "id",
+              "name",
+              "pinyin",
+              "hanzi",
+              "english",
+              "common_english",
+              "created_at",
+              "updated_at"
+            ],
+            "filter": {},
+            "allow_aggregations": true
+          }
+        }
+      ]
+    },
+    {
+      "table": {
+        "schema": "public",
+        "name": "herb_action_annotations"
+      },
+      "object_relationships": [
+        {
+          "name": "herb_action",
+          "using": {
+            "foreign_key_constraint_on": "herb_action_id"
+          }
+        }
+      ],
+      "select_permissions": [
+        {
+          "role": "anonymous",
+          "permission": {
+            "columns": [
+              "id",
+              "herb_action_id",
+              "annotation",
+              "created_at",
+              "updated_at"
+            ],
+            "filter": {},
+            "allow_aggregations": true
+          }
+        }
+      ]
+    },
+    {
+      "table": {
+        "schema": "public",
+        "name": "herb_action_indications"
+      },
+      "object_relationships": [
+        {
+          "name": "herb_action",
+          "using": {
+            "foreign_key_constraint_on": "herb_action_id"
+          }
+        }
+      ],
+      "select_permissions": [
+        {
+          "role": "anonymous",
+          "permission": {
+            "columns": [
+              "id",
+              "herb_action_id",
+              "indication",
+              "created_at",
+              "updated_at"
+            ],
+            "filter": {},
+            "allow_aggregations": true
+          }
+        }
+      ]
+    },
+    {
+      "table": {
+        "schema": "public",
+        "name": "herb_action_types"
+      },
+      "array_relationships": [
+        {
+          "name": "herb_actions",
+          "using": {
+            "foreign_key_constraint_on": {
+              "column": "herb_action_type_id",
+              "table": {
+                "schema": "public",
+                "name": "herb_actions"
+              }
+            }
+          }
+        }
+      ],
+      "select_permissions": [
+        {
+          "role": "anonymous",
+          "permission": {
+            "columns": [
+              "id",
+              "name",
+              "description",
+              "created_at",
+              "updated_at"
+            ],
+            "filter": {},
+            "allow_aggregations": true
+          }
+        }
+      ]
+    },
+    {
+      "table": {
+        "schema": "public",
+        "name": "herb_actions"
+      },
+      "object_relationships": [
+        {
+          "name": "herb",
+          "using": {
+            "foreign_key_constraint_on": "herb_id"
+          }
+        },
+        {
+          "name": "herb_action_type",
+          "using": {
+            "foreign_key_constraint_on": "herb_action_type_id"
+          }
+        }
+      ],
+      "array_relationships": [
+        {
+          "name": "herb_action_annotations",
+          "using": {
+            "foreign_key_constraint_on": {
+              "column": "herb_action_id",
+              "table": {
+                "schema": "public",
+                "name": "herb_action_annotations"
+              }
+            }
+          }
+        },
+        {
+          "name": "herb_action_indications",
+          "using": {
+            "foreign_key_constraint_on": {
+              "column": "herb_action_id",
+              "table": {
+                "schema": "public",
+                "name": "herb_action_indications"
+              }
+            }
+          }
+        }
+      ],
+      "select_permissions": [
+        {
+          "role": "anonymous",
+          "permission": {
+            "columns": [
+              "id",
+              "herb_id",
+              "herb_action_type_id",
+              "created_at",
+              "updated_at"
+            ],
+            "filter": {},
+            "allow_aggregations": true
+          }
+        }
+      ]
+    },
+    {
+      "table": {
+        "schema": "public",
+        "name": "herb_categories"
+      },
+      "array_relationships": [
+        {
+          "name": "herbs",
+          "using": {
+            "foreign_key_constraint_on": {
+              "column": "herb_category_id",
+              "table": {
+                "schema": "public",
+                "name": "herbs"
+              }
+            }
+          }
+        }
+      ],
+      "select_permissions": [
+        {
+          "role": "anonymous",
+          "permission": {
+            "columns": [
+              "id",
+              "name",
+              "description",
+              "created_at",
+              "updated_at"
+            ],
+            "filter": {},
+            "allow_aggregations": true
+          }
+        }
+      ]
+    },
+    {
+      "table": {
+        "schema": "public",
+        "name": "herb_combination_herbs"
+      },
+      "object_relationships": [
+        {
+          "name": "herb",
+          "using": {
+            "foreign_key_constraint_on": "herb_id"
+          }
+        },
+        {
+          "name": "herb_combination",
+          "using": {
+            "foreign_key_constraint_on": "herb_combination_id"
+          }
+        }
+      ],
+      "select_permissions": [
+        {
+          "role": "anonymous",
+          "permission": {
+            "columns": [
+              "id",
+              "herb_id",
+              "herb_combination_id",
+              "created_at",
+              "updated_at"
+            ],
+            "filter": {},
+            "allow_aggregations": true
+          }
+        }
+      ]
+    },
+    {
+      "table": {
+        "schema": "public",
+        "name": "herb_combination_use_cases"
+      },
+      "object_relationships": [
+        {
+          "name": "herb_combination",
+          "using": {
+            "foreign_key_constraint_on": "herb_combination_id"
+          }
+        }
+      ],
+      "select_permissions": [
+        {
+          "role": "anonymous",
+          "permission": {
+            "columns": [
+              "id",
+              "herb_combination_id",
+              "use_case",
+              "created_at",
+              "updated_at"
+            ],
+            "filter": {},
+            "allow_aggregations": true
+          }
+        }
+      ]
+    },
+    {
+      "table": {
+        "schema": "public",
+        "name": "herb_combinations"
+      },
+      "array_relationships": [
+        {
+          "name": "herb_combination_herbs",
+          "using": {
+            "foreign_key_constraint_on": {
+              "column": "herb_combination_id",
+              "table": {
+                "schema": "public",
+                "name": "herb_combination_herbs"
+              }
+            }
+          }
+        },
+        {
+          "name": "herb_combination_use_cases",
+          "using": {
+            "foreign_key_constraint_on": {
+              "column": "herb_combination_id",
+              "table": {
+                "schema": "public",
+                "name": "herb_combination_use_cases"
+              }
+            }
+          }
+        }
+      ],
+      "select_permissions": [
+        {
+          "role": "anonymous",
+          "permission": {
+            "columns": [
+              "id",
+              "description",
+              "created_at",
+              "updated_at"
+            ],
+            "filter": {},
+            "allow_aggregations": true
+          }
+        }
+      ]
+    },
+    {
+      "table": {
+        "schema": "public",
+        "name": "herb_dosage_types"
+      },
+      "array_relationships": [
+        {
+          "name": "herb_dosages",
+          "using": {
+            "foreign_key_constraint_on": {
+              "column": "herb_dosage_type_id",
+              "table": {
+                "schema": "public",
+                "name": "herb_dosages"
+              }
+            }
+          }
+        }
+      ],
+      "select_permissions": [
+        {
+          "role": "anonymous",
+          "permission": {
+            "columns": [
+              "id",
+              "name",
+              "description",
+              "created_at",
+              "updated_at"
+            ],
+            "filter": {},
+            "allow_aggregations": true
+          }
+        }
+      ]
+    },
+    {
+      "table": {
+        "schema": "public",
+        "name": "herb_dosages"
+      },
+      "object_relationships": [
+        {
+          "name": "herb",
+          "using": {
+            "foreign_key_constraint_on": "herb_id"
+          }
+        },
+        {
+          "name": "herb_dosage_type",
+          "using": {
+            "foreign_key_constraint_on": "herb_dosage_type_id"
+          }
+        }
+      ],
+      "select_permissions": [
+        {
+          "role": "anonymous",
+          "permission": {
+            "columns": [
+              "id",
+              "herb_id",
+              "herb_dosage_type_id",
+              "dosage",
+              "created_at",
+              "updated_at"
+            ],
+            "filter": {},
+            "allow_aggregations": true
+          }
+        }
+      ]
+    },
+    {
+      "table": {
+        "schema": "public",
+        "name": "herb_notes"
+      },
+      "object_relationships": [
+        {
+          "name": "herb",
+          "using": {
+            "foreign_key_constraint_on": "herb_id"
+          }
+        }
+      ],
+      "select_permissions": [
+        {
+          "role": "anonymous",
+          "permission": {
+            "columns": [
+              "id",
+              "herb_id",
+              "note",
+              "created_at",
+              "updated_at"
+            ],
+            "filter": {},
+            "allow_aggregations": true
+          }
+        }
+      ]
+    },
+    {
+      "table": {
+        "schema": "public",
+        "name": "herb_properties"
+      },
+      "object_relationships": [
+        {
+          "name": "herb",
+          "using": {
+            "foreign_key_constraint_on": "herb_id"
+          }
+        },
+        {
+          "name": "herb_property_type",
+          "using": {
+            "foreign_key_constraint_on": "herb_property_type_id"
+          }
+        },
+        {
+          "name": "precedence_type",
+          "using": {
+            "foreign_key_constraint_on": "precedence_type_id"
+          }
+        }
+      ],
+      "select_permissions": [
+        {
+          "role": "anonymous",
+          "permission": {
+            "columns": [
+              "id",
+              "herb_id",
+              "herb_property_type_id",
+              "precedence_type_id",
+              "property",
+              "created_at",
+              "updated_at"
+            ],
+            "filter": {},
+            "allow_aggregations": true
+          }
+        }
+      ]
+    },
+    {
+      "table": {
+        "schema": "public",
+        "name": "herb_property_types"
+      },
+      "array_relationships": [
+        {
+          "name": "herb_properties",
+          "using": {
+            "foreign_key_constraint_on": {
+              "column": "herb_property_type_id",
+              "table": {
+                "schema": "public",
+                "name": "herb_properties"
+              }
+            }
+          }
+        }
+      ],
+      "select_permissions": [
+        {
+          "role": "anonymous",
+          "permission": {
+            "columns": [
+              "id",
+              "name",
+              "description",
+              "created_at",
+              "updated_at"
+            ],
+            "filter": {},
+            "allow_aggregations": true
+          }
+        }
+      ]
+    },
+    {
+      "table": {
+        "schema": "public",
+        "name": "herb_warning_types"
+      },
+      "array_relationships": [
+        {
+          "name": "herb_warnings",
+          "using": {
+            "foreign_key_constraint_on": {
+              "column": "herb_warning_type_id",
+              "table": {
+                "schema": "public",
+                "name": "herb_warnings"
+              }
+            }
+          }
+        }
+      ],
+      "select_permissions": [
+        {
+          "role": "anonymous",
+          "permission": {
+            "columns": [
+              "id",
+              "name",
+              "created_at",
+              "updated_at"
+            ],
+            "filter": {},
+            "allow_aggregations": true
+          }
+        }
+      ]
+    },
+    {
+      "table": {
+        "schema": "public",
+        "name": "herb_warnings"
+      },
+      "object_relationships": [
+        {
+          "name": "herb",
+          "using": {
+            "foreign_key_constraint_on": "herb_id"
+          }
+        },
+        {
+          "name": "herb_warning_type",
+          "using": {
+            "foreign_key_constraint_on": "herb_warning_type_id"
+          }
+        }
+      ],
+      "select_permissions": [
+        {
+          "role": "anonymous",
+          "permission": {
+            "columns": [
+              "id",
+              "herb_id",
+              "herb_warning_type_id",
+              "warning",
+              "created_at",
+              "updated_at"
+            ],
+            "filter": {},
+            "allow_aggregations": true
+          }
+        }
+      ]
+    },
+    {
+      "table": {
+        "schema": "public",
+        "name": "herbs"
+      },
+      "object_relationships": [
+        {
+          "name": "herb_category",
+          "using": {
+            "foreign_key_constraint_on": "herb_category_id"
+          }
+        }
+      ],
+      "array_relationships": [
+        {
+          "name": "formula_herbs",
+          "using": {
+            "foreign_key_constraint_on": {
+              "column": "herb_id",
+              "table": {
+                "schema": "public",
+                "name": "formula_herbs"
+              }
+            }
+          }
+        },
+        {
+          "name": "formula_modifications",
+          "using": {
+            "foreign_key_constraint_on": {
+              "column": "herb_id",
+              "table": {
+                "schema": "public",
+                "name": "formula_modifications"
+              }
+            }
+          }
+        },
+        {
+          "name": "herb_actions",
+          "using": {
+            "foreign_key_constraint_on": {
+              "column": "herb_id",
+              "table": {
+                "schema": "public",
+                "name": "herb_actions"
+              }
+            }
+          }
+        },
+        {
+          "name": "herb_combination_herbs",
+          "using": {
+            "foreign_key_constraint_on": {
+              "column": "herb_id",
+              "table": {
+                "schema": "public",
+                "name": "herb_combination_herbs"
+              }
+            }
+          }
+        },
+        {
+          "name": "herb_dosages",
+          "using": {
+            "foreign_key_constraint_on": {
+              "column": "herb_id",
+              "table": {
+                "schema": "public",
+                "name": "herb_dosages"
+              }
+            }
+          }
+        },
+        {
+          "name": "herb_notes",
+          "using": {
+            "foreign_key_constraint_on": {
+              "column": "herb_id",
+              "table": {
+                "schema": "public",
+                "name": "herb_notes"
+              }
+            }
+          }
+        },
+        {
+          "name": "herb_properties",
+          "using": {
+            "foreign_key_constraint_on": {
+              "column": "herb_id",
+              "table": {
+                "schema": "public",
+                "name": "herb_properties"
+              }
+            }
+          }
+        },
+        {
+          "name": "herb_warnings",
+          "using": {
+            "foreign_key_constraint_on": {
+              "column": "herb_id",
+              "table": {
+                "schema": "public",
+                "name": "herb_warnings"
+              }
+            }
+          }
+        }
+      ],
+      "select_permissions": [
+        {
+          "role": "anonymous",
+          "permission": {
+            "columns": [
+              "id",
+              "name",
+              "herb_category_id",
+              "pinyin",
+              "hanzi",
+              "latin",
+              "pharm_latin",
+              "common_english",
+              "created_at",
+              "updated_at"
+            ],
+            "filter": {},
+            "allow_aggregations": true
+          }
+        }
+      ]
+    },
+    {
+      "table": {
+        "schema": "public",
+        "name": "precedence_types"
+      },
+      "array_relationships": [
+        {
+          "name": "herb_properties",
+          "using": {
+            "foreign_key_constraint_on": {
+              "column": "precedence_type_id",
+              "table": {
+                "schema": "public",
+                "name": "herb_properties"
+              }
+            }
+          }
+        }
+      ],
+      "select_permissions": [
+        {
+          "role": "anonymous",
+          "permission": {
+            "columns": [
+              "id",
+              "name",
+              "description",
+              "created_at",
+              "updated_at"
+            ],
+            "filter": {},
+            "allow_aggregations": true
+          }
+        }
+      ]
+    },
+    {
+      "table": {
+        "schema": "public",
+        "name": "symptoms"
+      },
+      "array_relationships": [
+        {
+          "name": "formula_manifestation_symptoms",
+          "using": {
+            "foreign_key_constraint_on": {
+              "column": "symptom_id",
+              "table": {
+                "schema": "public",
+                "name": "formula_manifestation_symptoms"
+              }
+            }
+          }
+        }
+      ],
+      "select_permissions": [
+        {
+          "role": "anonymous",
+          "permission": {
+            "columns": [
+              "id",
+              "name",
+              "created_at",
+              "updated_at"
+            ],
+            "filter": {},
+            "allow_aggregations": true
+          }
+        }
+      ]
+    },
+    {
+      "table": {
+        "schema": "public",
+        "name": "syndromes"
+      },
+      "array_relationships": [
+        {
+          "name": "formula_syndromes",
+          "using": {
+            "foreign_key_constraint_on": {
+              "column": "syndrome_id",
+              "table": {
+                "schema": "public",
+                "name": "formula_syndromes"
+              }
+            }
+          }
+        }
+      ],
+      "select_permissions": [
+        {
+          "role": "anonymous",
+          "permission": {
+            "columns": [
+              "id",
+              "name",
+              "created_at",
+              "updated_at"
+            ],
+            "filter": {},
+            "allow_aggregations": true
+          }
+        }
+      ]
+    }
+  ]
+}
