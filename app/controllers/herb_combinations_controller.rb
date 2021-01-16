@@ -1,6 +1,6 @@
-class HerbCombinationsController < AuthenticatedController
-  skip_before_action :authenticate_user!, only: [:index, :show]
-  before_action :set_herb_combination, only: [:show, :update, :destroy]
+class HerbCombinationsController < ApplicationController
+  
+  before_action :set_herb_combination, only: [:show]
 
   # GET /herb_combinations
   # GET /herb_combinations.json
@@ -11,34 +11,6 @@ class HerbCombinationsController < AuthenticatedController
   # GET /herb_combinations/1
   # GET /herb_combinations/1.json
   def show
-  end
-
-  # POST /herb_combinations
-  # POST /herb_combinations.json
-  def create
-    @herb_combination = HerbCombination.new(herb_combination_params)
-
-    if @herb_combination.save
-      render :show, status: :created, location: @herb_combination
-    else
-      render json: @herb_combination.errors, status: :unprocessable_entity
-    end
-  end
-
-  # PATCH/PUT /herb_combinations/1
-  # PATCH/PUT /herb_combinations/1.json
-  def update
-    if @herb_combination.update(herb_combination_params)
-      render :show, status: :ok, location: @herb_combination
-    else
-      render json: @herb_combination.errors, status: :unprocessable_entity
-    end
-  end
-
-  # DELETE /herb_combinations/1
-  # DELETE /herb_combinations/1.json
-  def destroy
-    @herb_combination.destroy
   end
 
   private

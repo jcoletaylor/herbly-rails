@@ -31,6 +31,13 @@ class Herb < ApplicationRecord
   belongs_to :herb_category
   has_many :herb_properties
   has_many :herb_dosages
+  has_many :herb_actions
+  has_many :herb_action_types, through: :herb_actions
+  has_many :herb_warnings
+  has_many :herb_warning_types, through: :herb_warnings
+  has_many :herb_notes
+  has_many :herb_combination_herbs
+  has_many :herb_combinations, through: :herb_combination_herbs
 
   validates :name, presence: true, uniqueness: true
   validates :herb_category, presence: true

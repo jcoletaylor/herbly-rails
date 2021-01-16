@@ -13,4 +13,7 @@
 #
 class HerbCombination < ApplicationRecord
     validates :description, presence: true, uniqueness: true
+    has_many :herb_combination_herbs
+    has_many :herbs, through: :herb_combination_herbs
+    has_many :herb_combination_use_cases
 end

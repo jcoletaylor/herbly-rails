@@ -309,16 +309,6 @@ ActiveRecord::Schema.define(version: 2021_01_09_191217) do
     t.index ["pinyin"], name: "index_herbs_on_pinyin"
   end
 
-  create_table "knex_migrations", id: :serial, force: :cascade do |t|
-    t.string "name", limit: 255
-    t.integer "batch"
-    t.datetime "migration_time"
-  end
-
-  create_table "knex_migrations_lock", primary_key: "index", id: :serial, force: :cascade do |t|
-    t.integer "is_locked"
-  end
-
   create_table "precedence_types", force: :cascade do |t|
     t.string "name", null: false
     t.text "description"

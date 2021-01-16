@@ -1,11 +1,18 @@
-class FormulasController < AuthenticatedController
-  skip_before_action :authenticate_user!, only: [:index, :show]
-  before_action :set_formula, only: [:show, :update, :destroy]
+class FormulasController < ApplicationController
+  include PageSort
+
+  before_action :set_formula, only: [:show]
+  before_action :set_page_sort_params, only: [:index]
 
   # GET /formulas
   # GET /formulas.json
   def index
-    @formulas = Formula.all
+    @formulas_count = query_base.count
+    @formulas = query_base
+      .limit(page_sort_params[:limit])
+      .offset(page_sort_params[:offset])
+      .order(page_sort_params[:order])
+      .all
   end
 
   # GET /formulas/1
@@ -13,42 +20,23 @@ class FormulasController < AuthenticatedController
   def show
   end
 
-  # POST /formulas
-  # POST /formulas.json
-  def create
-    @formula = Formula.new(formula_params)
-
-    if @formula.save
-      render :show, status: :created, location: @formula
-    else
-      render json: @formula.errors, status: :unprocessable_entity
-    end
-  end
-
-  # PATCH/PUT /formulas/1
-  # PATCH/PUT /formulas/1.json
-  def update
-    if @formula.update(formula_params)
-      render :show, status: :ok, location: @formula
-    else
-      render json: @formula.errors, status: :unprocessable_entity
-    end
-  end
-
-  # DELETE /formulas/1
-  # DELETE /formulas/1.json
-  def destroy
-    @formula.destroy
-  end
-
   private
+
+    def query_base
+      Formula
+    end
+
     # Use callbacks to share common setup or constraints between actions.
     def set_formula
-      @formula = Formula.find(params[:id])
+      @formula = query_base.find(params[:id])
     end
 
     # Only allow a list of trusted parameters through.
     def formula_params
       params.require(:formula).permit(:name, :pinyin, :hanzi, :english, :common_english)
+    end
+
+    def set_page_sort_params
+      build_page_sort_params(:formula)
     end
 end

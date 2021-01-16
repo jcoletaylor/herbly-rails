@@ -24,4 +24,6 @@ class HerbAction < ApplicationRecord
 
   validates :herb, presence: true
   validates :herb_action_type, presence: true
+  has_many :herb_action_annotations
+  has_many :herb_action_indications
 end

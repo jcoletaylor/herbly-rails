@@ -1,17 +1,14 @@
-class HerbsController < AuthenticatedController
+class HerbsController < ApplicationController
   include PageSort
 
-  skip_before_action :authenticate_user!, only: [:index, :show]
-  before_action :set_herb, only: [:show, :update, :destroy]
+  before_action :set_herb, only: [:show]
   before_action :set_page_sort_params, only: [:index]
 
   # GET /herbs
   # GET /herbs.json
   def index
-    @herbs = Herb
-      .includes(:herb_category)
-      .includes(herb_properties: [:precedence_type, :herb_property_type])
-      .includes(herb_dosages: [:herb_dosage_type])
+    @herbs_count = query_base.count
+    @herbs = query_base
       .limit(page_sort_params[:limit])
       .offset(page_sort_params[:offset])
       .order(page_sort_params[:order])
@@ -23,42 +20,22 @@ class HerbsController < AuthenticatedController
   def show
   end
 
-  # POST /herbs
-  # POST /herbs.json
-  def create
-    @herb = Herb.new(herb_params)
-
-    if @herb.save
-      render :show, status: :created, location: @herb
-    else
-      render json: @herb.errors, status: :unprocessable_entity
-    end
-  end
-
-  # PATCH/PUT /herbs/1
-  # PATCH/PUT /herbs/1.json
-  def update
-    if @herb.update(herb_params)
-      render :show, status: :ok, location: @herb
-    else
-      render json: @herb.errors, status: :unprocessable_entity
-    end
-  end
-
-  # DELETE /herbs/1
-  # DELETE /herbs/1.json
-  def destroy
-    @herb.destroy
-  end
-
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_herb
-      @herb = Herb
+
+    def query_base
+      Herb
         .includes(:herb_category)
         .includes(herb_properties: [:precedence_type, :herb_property_type])
         .includes(herb_dosages: [:herb_dosage_type])
-        .find(params[:id])
+        .includes(herb_actions: [:herb_action_type, :herb_action_annotations, :herb_action_indications])
+        .includes(herb_warnings: [:herb_warning_type])
+        .includes(:herb_notes)
+        .includes(herb_combinations: [:herbs, :herb_combination_use_cases])
+    end
+
+    # Use callbacks to share common setup or constraints between actions.
+    def set_herb
+      @herb = query_base.find(params[:id])
     end
 
     # Only allow a list of trusted parameters through.

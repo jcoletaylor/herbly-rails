@@ -1,8 +1,8 @@
 Rails.application.routes.draw do
+  # mount Rswag::Ui::Engine => '/api-docs'
+  # mount Rswag::Api::Engine => '/api-docs'
   resources :herb_warnings
   resources :herb_warning_types
-  mount Rswag::Ui::Engine => '/api-docs'
-  mount Rswag::Api::Engine => '/api-docs'
   resources :herb_dosages
   resources :formula_modifications
   resources :formula_modification_sets
@@ -36,10 +36,5 @@ Rails.application.routes.draw do
   resources :herb_action_types
   resources :herb_categories
   resources :precedence_types
-  devise_for :users,
-  controllers: {
-    registrations: :registrations,
-    sessions: :sessions
-  }
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 end
