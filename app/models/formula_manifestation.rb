@@ -22,4 +22,6 @@ class FormulaManifestation < ApplicationRecord
   belongs_to :formula
 
   validates :formula, presence: true
+  has_many :formula_manifestation_symptoms
+  has_many :symptoms, through: :formula_manifestation_symptoms
 end

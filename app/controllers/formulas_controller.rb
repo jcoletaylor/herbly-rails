@@ -24,6 +24,16 @@ class FormulasController < ApplicationController
 
     def query_base
       Formula
+        .includes(:formula_also_knowns)
+        .includes(formula_herbs: [:herb, { formula_herb_actions: [:formula_named_action] }])
+        .includes(formula_actions: [:formula_named_action])
+        .includes(:syndromes)
+        .includes(:conditions)
+        .includes(:formula_contraindications)
+        .includes(:formula_interactions)
+        .includes(:formula_notes)
+        .includes(formula_manifestation: [ { formula_manifestation_symptoms: [:symptom] }])
+        .includes(formula_modification_sets: [ { formula_modifications: :herb } ])
     end
 
     # Use callbacks to share common setup or constraints between actions.

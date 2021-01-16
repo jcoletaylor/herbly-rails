@@ -13,4 +13,7 @@
 #
 class FormulaNamedAction < ApplicationRecord
     validates :name, presence: true, uniqueness: true
+
+    has_many :formula_herb_actions
+    has_many :formula_actions
 end

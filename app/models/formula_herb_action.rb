@@ -24,4 +24,8 @@ class FormulaHerbAction < ApplicationRecord
 
   validates :formula_herb, presence: true
   validates :formula_named_action, presence: true
+
+  def action_name
+    formula_named_action.name
+  end
 end

@@ -22,4 +22,7 @@ class FormulaModificationSet < ApplicationRecord
 
   validates :formula, presence: true
   validates :purpose, presence: true
+
+  has_many :formula_modifications
+  has_many :herbs, through: :formula_modifications
 end
