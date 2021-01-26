@@ -30,6 +30,7 @@ SELECT
   setweight(to_tsvector('english', coalesce(string_agg(formula_named_actions.name, ' '))::TEXT), 'C') ||
   setweight(to_tsvector('english', coalesce(string_agg(syndromes.name, ' '))::TEXT), 'C') ||
   setweight(to_tsvector('english', coalesce(string_agg(conditions.name, ' '))::TEXT), 'C') ||
+  setweight(to_tsvector('english', coalesce(string_agg(symptoms.name, ' '))::TEXT), 'C') ||
   setweight(to_tsvector('english', coalesce(string_agg(formula_notes.note, ' '))::TEXT), 'D') AS document
 FROM formulas
 LEFT OUTER JOIN formula_notes ON formulas.id = formula_notes.formula_id
@@ -40,6 +41,9 @@ LEFT OUTER JOIN formula_syndromes ON formulas.id = formula_syndromes.formula_id
 LEFT OUTER JOIN syndromes ON formula_syndromes.syndrome_id = syndromes.id
 LEFT OUTER JOIN formula_conditions ON formulas.id = formula_conditions.formula_id
 LEFT OUTER JOIN conditions ON formula_conditions.condition_id = conditions.id
+LEFT OUTER JOIN formula_manifestations ON formulas.id = formula_manifestations.formula_id
+LEFT OUTER JOIN formula_manifestation_symptoms ON formula_manifestations.id = formula_manifestation_symptoms.formula_manifestation_id
+LEFT OUTER JOIN symptoms ON formula_manifestation_symptoms.symptom_id = symptoms.id
 GROUP BY formulas.id
 
 ORDER BY name ASC;

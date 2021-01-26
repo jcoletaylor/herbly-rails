@@ -395,7 +395,7 @@ ActiveRecord::Schema.define(version: 2021_01_26_014731) do
   add_foreign_key "herb_warnings", "herbs"
   add_foreign_key "herbs", "herb_categories"
 
-  create_view "search_results", sql_definition: <<-SQL
+  create_view "search_results", materialized: true, sql_definition: <<-SQL
       SELECT herbs.id AS searchable_id,
       'Herb'::text AS searchable_type,
       herbs.name,
@@ -412,8 +412,8 @@ ActiveRecord::Schema.define(version: 2021_01_26_014731) do
       'Formula'::text AS searchable_type,
       formulas.name,
       formulas.common_english,
-      (((((((setweight(to_tsvector('english'::regconfig, (formulas.name)::text), 'A'::"char") || setweight(to_tsvector('english'::regconfig, (formulas.pinyin)::text), 'B'::"char")) || setweight(to_tsvector('english'::regconfig, (formulas.common_english)::text), 'B'::"char")) || setweight(to_tsvector('english'::regconfig, COALESCE(string_agg((formula_also_knowns.name)::text, ' '::text))), 'C'::"char")) || setweight(to_tsvector('english'::regconfig, COALESCE(string_agg((formula_named_actions.name)::text, ' '::text))), 'C'::"char")) || setweight(to_tsvector('english'::regconfig, COALESCE(string_agg((syndromes.name)::text, ' '::text))), 'C'::"char")) || setweight(to_tsvector('english'::regconfig, COALESCE(string_agg((conditions.name)::text, ' '::text))), 'C'::"char")) || setweight(to_tsvector('english'::regconfig, COALESCE(string_agg(formula_notes.note, ' '::text))), 'D'::"char")) AS document
-     FROM ((((((((formulas
+      ((((((((setweight(to_tsvector('english'::regconfig, (formulas.name)::text), 'A'::"char") || setweight(to_tsvector('english'::regconfig, (formulas.pinyin)::text), 'B'::"char")) || setweight(to_tsvector('english'::regconfig, (formulas.common_english)::text), 'B'::"char")) || setweight(to_tsvector('english'::regconfig, COALESCE(string_agg((formula_also_knowns.name)::text, ' '::text))), 'C'::"char")) || setweight(to_tsvector('english'::regconfig, COALESCE(string_agg((formula_named_actions.name)::text, ' '::text))), 'C'::"char")) || setweight(to_tsvector('english'::regconfig, COALESCE(string_agg((syndromes.name)::text, ' '::text))), 'C'::"char")) || setweight(to_tsvector('english'::regconfig, COALESCE(string_agg((conditions.name)::text, ' '::text))), 'C'::"char")) || setweight(to_tsvector('english'::regconfig, COALESCE(string_agg((symptoms.name)::text, ' '::text))), 'C'::"char")) || setweight(to_tsvector('english'::regconfig, COALESCE(string_agg(formula_notes.note, ' '::text))), 'D'::"char")) AS document
+     FROM (((((((((((formulas
        LEFT JOIN formula_notes ON ((formulas.id = formula_notes.formula_id)))
        LEFT JOIN formula_also_knowns ON ((formulas.id = formula_also_knowns.formula_id)))
        LEFT JOIN formula_actions ON ((formulas.id = formula_actions.formula_id)))
@@ -422,6 +422,9 @@ ActiveRecord::Schema.define(version: 2021_01_26_014731) do
        LEFT JOIN syndromes ON ((formula_syndromes.syndrome_id = syndromes.id)))
        LEFT JOIN formula_conditions ON ((formulas.id = formula_conditions.formula_id)))
        LEFT JOIN conditions ON ((formula_conditions.condition_id = conditions.id)))
+       LEFT JOIN formula_manifestations ON ((formulas.id = formula_manifestations.formula_id)))
+       LEFT JOIN formula_manifestation_symptoms ON ((formula_manifestations.id = formula_manifestation_symptoms.formula_manifestation_id)))
+       LEFT JOIN symptoms ON ((formula_manifestation_symptoms.symptom_id = symptoms.id)))
     GROUP BY formulas.id
     ORDER BY 3;
   SQL
