@@ -6,7 +6,7 @@ CREATE OR REPLACE FUNCTION full_search (search text)
 	FROM
 		search_results
 	WHERE
-		document @@ to_tsquery('english', search)
+		document @@ plainto_tsquery('english', search)
 	ORDER BY
 		name ASC
 $$
