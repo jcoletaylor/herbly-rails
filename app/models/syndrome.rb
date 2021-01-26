@@ -9,7 +9,8 @@
 #
 # Indexes
 #
-#  index_syndromes_on_name  (name)
+#  index_syndromes_on_name      (name)
+#  index_syndromes_on_name_gin  (name) USING gin
 #
 class Syndrome < ApplicationRecord
     validates :name, presence: true, uniqueness: true

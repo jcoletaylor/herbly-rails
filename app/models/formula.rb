@@ -13,11 +13,14 @@
 #
 # Indexes
 #
-#  index_formulas_on_common_english  (common_english)
-#  index_formulas_on_english         (english)
-#  index_formulas_on_hanzi           (hanzi)
-#  index_formulas_on_name            (name)
-#  index_formulas_on_pinyin          (pinyin)
+#  index_formulas_on_common_english      (common_english)
+#  index_formulas_on_common_english_gin  (common_english) USING gin
+#  index_formulas_on_english             (english)
+#  index_formulas_on_hanzi               (hanzi)
+#  index_formulas_on_name                (name)
+#  index_formulas_on_name_gin            (name) USING gin
+#  index_formulas_on_pinyin              (pinyin)
+#  index_formulas_on_pinyin_gin          (pinyin) USING gin
 #
 class Formula < ApplicationRecord
     validates :name, presence: true, uniqueness: true

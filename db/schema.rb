@@ -10,9 +10,10 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_01_09_191217) do
+ActiveRecord::Schema.define(version: 2021_01_26_014731) do
 
   # These are extensions that must be enabled in order to support this database
+  enable_extension "pg_trgm"
   enable_extension "plpgsql"
 
   create_table "conditions", force: :cascade do |t|
@@ -20,6 +21,7 @@ ActiveRecord::Schema.define(version: 2021_01_09_191217) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["name"], name: "index_conditions_on_name"
+    t.index ["name"], name: "index_conditions_on_name_gin", using: :gin
   end
 
   create_table "formula_actions", force: :cascade do |t|
@@ -38,6 +40,7 @@ ActiveRecord::Schema.define(version: 2021_01_09_191217) do
     t.datetime "updated_at", precision: 6, null: false
     t.index ["formula_id"], name: "index_formula_also_knowns_on_formula_id"
     t.index ["name"], name: "index_formula_also_knowns_on_name"
+    t.index ["name"], name: "index_formula_also_knowns_on_name_gin", using: :gin
   end
 
   create_table "formula_conditions", force: :cascade do |t|
@@ -127,6 +130,7 @@ ActiveRecord::Schema.define(version: 2021_01_09_191217) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["name"], name: "index_formula_named_actions_on_name"
+    t.index ["name"], name: "index_formula_named_actions_on_name_gin", using: :gin
   end
 
   create_table "formula_notes", force: :cascade do |t|
@@ -135,6 +139,7 @@ ActiveRecord::Schema.define(version: 2021_01_09_191217) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["formula_id"], name: "index_formula_notes_on_formula_id"
+    t.index ["note"], name: "index_formula_notes_on_note_gin", using: :gin
   end
 
   create_table "formula_syndromes", force: :cascade do |t|
@@ -155,10 +160,13 @@ ActiveRecord::Schema.define(version: 2021_01_09_191217) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["common_english"], name: "index_formulas_on_common_english"
+    t.index ["common_english"], name: "index_formulas_on_common_english_gin", using: :gin
     t.index ["english"], name: "index_formulas_on_english"
     t.index ["hanzi"], name: "index_formulas_on_hanzi"
     t.index ["name"], name: "index_formulas_on_name"
+    t.index ["name"], name: "index_formulas_on_name_gin", using: :gin
     t.index ["pinyin"], name: "index_formulas_on_pinyin"
+    t.index ["pinyin"], name: "index_formulas_on_pinyin_gin", using: :gin
   end
 
   create_table "herb_action_annotations", force: :cascade do |t|
@@ -183,6 +191,7 @@ ActiveRecord::Schema.define(version: 2021_01_09_191217) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["name"], name: "index_herb_action_types_on_name"
+    t.index ["name"], name: "index_herb_action_types_on_name_gin", using: :gin
   end
 
   create_table "herb_actions", force: :cascade do |t|
@@ -200,6 +209,7 @@ ActiveRecord::Schema.define(version: 2021_01_09_191217) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["name"], name: "index_herb_categories_on_name"
+    t.index ["name"], name: "index_herb_categories_on_name_gin", using: :gin
   end
 
   create_table "herb_combination_herbs", force: :cascade do |t|
@@ -250,6 +260,7 @@ ActiveRecord::Schema.define(version: 2021_01_09_191217) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["herb_id"], name: "index_herb_notes_on_herb_id"
+    t.index ["note"], name: "index_herb_notes_on_note_gin", using: :gin
   end
 
   create_table "herb_properties", force: :cascade do |t|
@@ -301,12 +312,15 @@ ActiveRecord::Schema.define(version: 2021_01_09_191217) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["common_english"], name: "index_herbs_on_common_english"
+    t.index ["common_english"], name: "index_herbs_on_common_english_gin", using: :gin
     t.index ["hanzi"], name: "index_herbs_on_hanzi"
     t.index ["herb_category_id"], name: "index_herbs_on_herb_category_id"
     t.index ["latin"], name: "index_herbs_on_latin"
     t.index ["name"], name: "index_herbs_on_name"
+    t.index ["name"], name: "index_herbs_on_name_gin", using: :gin
     t.index ["pharm_latin"], name: "index_herbs_on_pharm_latin"
     t.index ["pinyin"], name: "index_herbs_on_pinyin"
+    t.index ["pinyin"], name: "index_herbs_on_pinyin_gin", using: :gin
   end
 
   create_table "precedence_types", force: :cascade do |t|
@@ -329,6 +343,7 @@ ActiveRecord::Schema.define(version: 2021_01_09_191217) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["name"], name: "index_syndromes_on_name"
+    t.index ["name"], name: "index_syndromes_on_name_gin", using: :gin
   end
 
   create_table "users", force: :cascade do |t|
@@ -379,4 +394,35 @@ ActiveRecord::Schema.define(version: 2021_01_09_191217) do
   add_foreign_key "herb_warnings", "herb_warning_types"
   add_foreign_key "herb_warnings", "herbs"
   add_foreign_key "herbs", "herb_categories"
+
+  create_view "search_results", sql_definition: <<-SQL
+      SELECT herbs.id AS searchable_id,
+      'Herb'::text AS searchable_type,
+      herbs.name,
+      herbs.common_english,
+      (((((setweight(to_tsvector('english'::regconfig, (herbs.name)::text), 'A'::"char") || setweight(to_tsvector('english'::regconfig, (herbs.pinyin)::text), 'B'::"char")) || setweight(to_tsvector('english'::regconfig, (herbs.common_english)::text), 'B'::"char")) || setweight(to_tsvector('english'::regconfig, COALESCE(string_agg((herb_categories.name)::text, ' '::text))), 'C'::"char")) || setweight(to_tsvector('english'::regconfig, COALESCE(string_agg((herb_action_types.name)::text, ' '::text))), 'C'::"char")) || setweight(to_tsvector('english'::regconfig, COALESCE(string_agg(herb_notes.note, ' '::text))), 'D'::"char")) AS document
+     FROM ((((herbs
+       LEFT JOIN herb_notes ON ((herbs.id = herb_notes.herb_id)))
+       LEFT JOIN herb_categories ON ((herbs.herb_category_id = herb_categories.id)))
+       LEFT JOIN herb_actions ON ((herbs.id = herb_actions.herb_id)))
+       LEFT JOIN herb_action_types ON ((herb_actions.herb_action_type_id = herb_action_types.id)))
+    GROUP BY herbs.id
+  UNION
+   SELECT formulas.id AS searchable_id,
+      'Formula'::text AS searchable_type,
+      formulas.name,
+      formulas.common_english,
+      (((((((setweight(to_tsvector('english'::regconfig, (formulas.name)::text), 'A'::"char") || setweight(to_tsvector('english'::regconfig, (formulas.pinyin)::text), 'B'::"char")) || setweight(to_tsvector('english'::regconfig, (formulas.common_english)::text), 'B'::"char")) || setweight(to_tsvector('english'::regconfig, COALESCE(string_agg((formula_also_knowns.name)::text, ' '::text))), 'C'::"char")) || setweight(to_tsvector('english'::regconfig, COALESCE(string_agg((formula_named_actions.name)::text, ' '::text))), 'C'::"char")) || setweight(to_tsvector('english'::regconfig, COALESCE(string_agg((syndromes.name)::text, ' '::text))), 'C'::"char")) || setweight(to_tsvector('english'::regconfig, COALESCE(string_agg((conditions.name)::text, ' '::text))), 'C'::"char")) || setweight(to_tsvector('english'::regconfig, COALESCE(string_agg(formula_notes.note, ' '::text))), 'D'::"char")) AS document
+     FROM ((((((((formulas
+       LEFT JOIN formula_notes ON ((formulas.id = formula_notes.formula_id)))
+       LEFT JOIN formula_also_knowns ON ((formulas.id = formula_also_knowns.formula_id)))
+       LEFT JOIN formula_actions ON ((formulas.id = formula_actions.formula_id)))
+       LEFT JOIN formula_named_actions ON ((formula_actions.formula_named_action_id = formula_named_actions.id)))
+       LEFT JOIN formula_syndromes ON ((formulas.id = formula_syndromes.formula_id)))
+       LEFT JOIN syndromes ON ((formula_syndromes.syndrome_id = syndromes.id)))
+       LEFT JOIN formula_conditions ON ((formulas.id = formula_conditions.formula_id)))
+       LEFT JOIN conditions ON ((formula_conditions.condition_id = conditions.id)))
+    GROUP BY formulas.id
+    ORDER BY 3;
+  SQL
 end

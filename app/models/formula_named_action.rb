@@ -9,7 +9,8 @@
 #
 # Indexes
 #
-#  index_formula_named_actions_on_name  (name)
+#  index_formula_named_actions_on_name      (name)
+#  index_formula_named_actions_on_name_gin  (name) USING gin
 #
 class FormulaNamedAction < ApplicationRecord
     validates :name, presence: true, uniqueness: true

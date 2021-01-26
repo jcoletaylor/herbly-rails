@@ -9,7 +9,8 @@
 #
 # Indexes
 #
-#  index_conditions_on_name  (name)
+#  index_conditions_on_name      (name)
+#  index_conditions_on_name_gin  (name) USING gin
 #
 class Condition < ApplicationRecord
     has_many :formula_conditions

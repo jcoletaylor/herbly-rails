@@ -12,6 +12,7 @@
 #
 #  index_formula_also_knowns_on_formula_id  (formula_id)
 #  index_formula_also_knowns_on_name        (name)
+#  index_formula_also_knowns_on_name_gin    (name) USING gin
 #
 # Foreign Keys
 #

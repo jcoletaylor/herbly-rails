@@ -11,6 +11,7 @@
 # Indexes
 #
 #  index_formula_notes_on_formula_id  (formula_id)
+#  index_formula_notes_on_note_gin    (note) USING gin
 #
 # Foreign Keys
 #

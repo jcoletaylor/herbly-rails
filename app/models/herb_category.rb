@@ -10,7 +10,8 @@
 #
 # Indexes
 #
-#  index_herb_categories_on_name  (name)
+#  index_herb_categories_on_name      (name)
+#  index_herb_categories_on_name_gin  (name) USING gin
 #
 class HerbCategory < ApplicationRecord
     validates :name, presence: true, uniqueness: true
