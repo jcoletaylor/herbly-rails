@@ -8,7 +8,7 @@ CREATE OR REPLACE FUNCTION full_search (search text)
 	WHERE
 		document @@ plainto_tsquery('english', search)
 	ORDER BY
-		name ASC
+		ts_rank(document, plainto_tsquery('english', search)) DESC;
 $$
 LANGUAGE sql
 STABLE;
