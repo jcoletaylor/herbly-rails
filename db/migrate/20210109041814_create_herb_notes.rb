@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class CreateHerbNotes < ActiveRecord::Migration[6.0]
   def change
     create_table :herb_notes do |t|

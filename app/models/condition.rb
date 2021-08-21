@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # == Schema Information
 #
 # Table name: conditions
@@ -13,8 +15,8 @@
 #  index_conditions_on_name_gin  (name) USING gin
 #
 class Condition < ApplicationRecord
-    has_many :formula_conditions
-    has_many :formulas, through: :formula_conditions
+  has_many :formula_conditions
+  has_many :formulas, through: :formula_conditions
 
-    validates :name, presence: true, uniqueness: true
+  validates :name, presence: true, uniqueness: true
 end

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # == Schema Information
 #
 # Table name: syndromes
@@ -13,5 +15,5 @@
 #  index_syndromes_on_name_gin  (name) USING gin
 #
 class Syndrome < ApplicationRecord
-    validates :name, presence: true, uniqueness: true
+  validates :name, presence: true, uniqueness: true
 end

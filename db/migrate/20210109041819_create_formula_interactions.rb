@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class CreateFormulaInteractions < ActiveRecord::Migration[6.0]
   def change
     create_table :formula_interactions do |t|

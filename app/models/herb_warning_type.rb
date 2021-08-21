@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # == Schema Information
 #
 # Table name: herb_warning_types
@@ -12,5 +14,5 @@
 #  index_herb_warning_types_on_name  (name)
 #
 class HerbWarningType < ApplicationRecord
-    validates :name, presence: true, uniqueness: true
+  validates :name, presence: true, uniqueness: true
 end

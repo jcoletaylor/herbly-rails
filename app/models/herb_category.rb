@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # == Schema Information
 #
 # Table name: herb_categories
@@ -14,5 +16,5 @@
 #  index_herb_categories_on_name_gin  (name) USING gin
 #
 class HerbCategory < ApplicationRecord
-    validates :name, presence: true, uniqueness: true
+  validates :name, presence: true, uniqueness: true
 end

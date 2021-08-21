@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class CreateFormulaConditions < ActiveRecord::Migration[6.0]
   def change
     create_table :formula_conditions do |t|

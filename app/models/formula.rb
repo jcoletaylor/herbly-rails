@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # == Schema Information
 #
 # Table name: formulas
@@ -23,24 +25,24 @@
 #  index_formulas_on_pinyin_gin          (pinyin) USING gin
 #
 class Formula < ApplicationRecord
-    validates :name, presence: true, uniqueness: true
+  validates :name, presence: true, uniqueness: true
 
-    has_many :formula_also_knowns
-    has_many :formula_herbs
-    has_many :herbs, through: :formula_herbs
-    has_many :formula_herb_actions, through: :formula_herbs
-    has_many :formula_actions
-    has_many :formula_named_actions, through: :formula_actions
-    has_many :formula_syndromes
-    has_many :syndromes, through: :formula_syndromes
-    has_many :formula_conditions
-    has_many :conditions, through: :formula_conditions
-    has_many :formula_contraindications
-    has_many :formula_interactions
-    has_many :formula_notes
-    has_one :formula_manifestation
-    has_many :formula_manifestation_symptoms, through: :formula_manifestation
-    has_many :symptoms, through: :formula_manifestation_symptoms
-    has_many :formula_modification_sets
-    has_many :formula_modifications, through: :formula_modification_sets
+  has_many :formula_also_knowns
+  has_many :formula_herbs
+  has_many :herbs, through: :formula_herbs
+  has_many :formula_herb_actions, through: :formula_herbs
+  has_many :formula_actions
+  has_many :formula_named_actions, through: :formula_actions
+  has_many :formula_syndromes
+  has_many :syndromes, through: :formula_syndromes
+  has_many :formula_conditions
+  has_many :conditions, through: :formula_conditions
+  has_many :formula_contraindications
+  has_many :formula_interactions
+  has_many :formula_notes
+  has_one :formula_manifestation
+  has_many :formula_manifestation_symptoms, through: :formula_manifestation
+  has_many :symptoms, through: :formula_manifestation_symptoms
+  has_many :formula_modification_sets
+  has_many :formula_modifications, through: :formula_modification_sets
 end

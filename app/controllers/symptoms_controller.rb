@@ -1,5 +1,6 @@
+# frozen_string_literal: true
+
 class SymptomsController < ApplicationController
-  
   before_action :set_symptom, only: [:show]
 
   # GET /symptoms
@@ -10,17 +11,17 @@ class SymptomsController < ApplicationController
 
   # GET /symptoms/1
   # GET /symptoms/1.json
-  def show
-  end
+  def show; end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_symptom
-      @symptom = Symptom.find(params[:id])
-    end
 
-    # Only allow a list of trusted parameters through.
-    def symptom_params
-      params.require(:symptom).permit(:name)
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_symptom
+    @symptom = Symptom.find(params[:id])
+  end
+
+  # Only allow a list of trusted parameters through.
+  def symptom_params
+    params.require(:symptom).permit(:name)
+  end
 end

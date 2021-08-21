@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class CreateFormulaManifestationSymptoms < ActiveRecord::Migration[6.0]
   def change
     create_table :formula_manifestation_symptoms do |t|

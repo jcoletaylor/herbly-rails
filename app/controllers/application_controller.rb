@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class ApplicationController < ActionController::API
   respond_to :json
   before_action :process_token
@@ -8,7 +10,7 @@ class ApplicationController < ActionController::API
   def process_token
     if request.headers['Authorization'].present?
       begin
-        jwt_payload = JWT.decode(request.headers['Authorization'].split(' ')[1], Rails.application.secrets.secret_key_base).first
+        jwt_payload = JWT.decode(request.headers['Authorization'].split[1], Rails.application.secrets.secret_key_base).first
         @current_user_id = jwt_payload['id']
       rescue JWT::ExpiredSignature, JWT::VerificationError, JWT::DecodeError
         head :unauthorized
@@ -17,7 +19,7 @@ class ApplicationController < ActionController::API
   end
 
   # If user has not signed in, return unauthorized response (called only when auth is needed)
-  def authenticate_user!(options = {})
+  def authenticate_user!(_options = {})
     head :unauthorized unless signed_in?
   end
 

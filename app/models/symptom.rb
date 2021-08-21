@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # == Schema Information
 #
 # Table name: symptoms
@@ -12,5 +14,5 @@
 #  index_symptoms_on_name  (name)
 #
 class Symptom < ApplicationRecord
-    validates :name, presence: true, uniqueness: true
+  validates :name, presence: true, uniqueness: true
 end

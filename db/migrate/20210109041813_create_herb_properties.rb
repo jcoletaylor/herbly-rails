@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class CreateHerbProperties < ActiveRecord::Migration[6.0]
   def change
     create_table :herb_properties do |t|

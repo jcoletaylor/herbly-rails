@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class CreateFormulaHerbActions < ActiveRecord::Migration[6.0]
   def change
     create_table :formula_herb_actions do |t|

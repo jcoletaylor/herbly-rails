@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # == Schema Information
 #
 # Table name: herb_dosage_types
@@ -13,5 +15,5 @@
 #  index_herb_dosage_types_on_name  (name)
 #
 class HerbDosageType < ApplicationRecord
-    validates :name, presence: true, uniqueness: true
+  validates :name, presence: true, uniqueness: true
 end

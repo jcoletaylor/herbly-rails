@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # == Schema Information
 #
 # Table name: herb_property_types
@@ -13,5 +15,5 @@
 #  index_herb_property_types_on_name  (name)
 #
 class HerbPropertyType < ApplicationRecord
-    validates :name, presence: true, uniqueness: true
+  validates :name, presence: true, uniqueness: true
 end
