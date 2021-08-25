@@ -20,4 +20,15 @@ RSpec.describe 'Herbs', type: :request do
       expect(response_herb_names).to include(*@herb_names)
     end
   end
+  describe 'GET /herbs/:id' do
+    it 'should be able to get a single herb with a valid response' do
+      herb = Herb.first
+      get herb_url(herb), as: :json
+      expect(response).to have_http_status(:success)
+      expect(response.content_type).to match(a_string_including('application/json'))
+      json_response = JSON.parse(response.body).deep_symbolize_keys
+      response_herb_name = json_response[:name]
+      expect(@herb_names).to include(response_herb_name)
+    end
+  end
 end
