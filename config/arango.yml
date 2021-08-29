@@ -1,0 +1,35 @@
+default: &default
+  connection: &default_connection
+    tls: false
+    port: 8765
+    verbose: false
+    warning: true
+    pool: true
+    size: 5
+    timeout: 5
+    server: localhost
+    active_cache: false
+
+development:
+  <<: *default
+  connection:
+    <<: *default_connection
+    username: herbly
+    password: herbly
+  database: herbs_development
+
+test:
+  <<: *default
+  connection:
+    <<: *default_connection
+    username: herbly
+    password: herbly
+  database: herbs_test
+
+production:
+  <<: *default
+  connection:
+    <<: *default_connection
+    username: herbly
+    password: herbly
+  database: herbs_production
