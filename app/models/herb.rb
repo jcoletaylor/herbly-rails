@@ -17,16 +17,13 @@
 #
 # Indexes
 #
-#  index_herbs_on_common_english      (common_english)
-#  index_herbs_on_common_english_gin  (common_english) USING gin
-#  index_herbs_on_hanzi               (hanzi)
-#  index_herbs_on_herb_category_id    (herb_category_id)
-#  index_herbs_on_latin               (latin)
-#  index_herbs_on_name                (name)
-#  index_herbs_on_name_gin            (name) USING gin
-#  index_herbs_on_pharm_latin         (pharm_latin)
-#  index_herbs_on_pinyin              (pinyin)
-#  index_herbs_on_pinyin_gin          (pinyin) USING gin
+#  index_herbs_on_common_english    (common_english)
+#  index_herbs_on_hanzi             (hanzi)
+#  index_herbs_on_herb_category_id  (herb_category_id)
+#  index_herbs_on_latin             (latin)
+#  index_herbs_on_name              (name)
+#  index_herbs_on_pharm_latin       (pharm_latin)
+#  index_herbs_on_pinyin            (pinyin)
 #
 # Foreign Keys
 #

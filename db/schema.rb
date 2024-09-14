@@ -10,10 +10,9 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_01_26_014731) do
+ActiveRecord::Schema.define(version: 2021_01_26_014212) do
 
   # These are extensions that must be enabled in order to support this database
-  enable_extension "pg_trgm"
   enable_extension "plpgsql"
 
   create_table "conditions", force: :cascade do |t|
@@ -21,7 +20,6 @@ ActiveRecord::Schema.define(version: 2021_01_26_014731) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["name"], name: "index_conditions_on_name"
-    t.index ["name"], name: "index_conditions_on_name_gin", using: :gin
   end
 
   create_table "formula_actions", force: :cascade do |t|
@@ -40,7 +38,6 @@ ActiveRecord::Schema.define(version: 2021_01_26_014731) do
     t.datetime "updated_at", precision: 6, null: false
     t.index ["formula_id"], name: "index_formula_also_knowns_on_formula_id"
     t.index ["name"], name: "index_formula_also_knowns_on_name"
-    t.index ["name"], name: "index_formula_also_knowns_on_name_gin", using: :gin
   end
 
   create_table "formula_conditions", force: :cascade do |t|
@@ -130,7 +127,6 @@ ActiveRecord::Schema.define(version: 2021_01_26_014731) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["name"], name: "index_formula_named_actions_on_name"
-    t.index ["name"], name: "index_formula_named_actions_on_name_gin", using: :gin
   end
 
   create_table "formula_notes", force: :cascade do |t|
@@ -139,7 +135,6 @@ ActiveRecord::Schema.define(version: 2021_01_26_014731) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["formula_id"], name: "index_formula_notes_on_formula_id"
-    t.index ["note"], name: "index_formula_notes_on_note_gin", using: :gin
   end
 
   create_table "formula_syndromes", force: :cascade do |t|
@@ -160,13 +155,10 @@ ActiveRecord::Schema.define(version: 2021_01_26_014731) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["common_english"], name: "index_formulas_on_common_english"
-    t.index ["common_english"], name: "index_formulas_on_common_english_gin", using: :gin
     t.index ["english"], name: "index_formulas_on_english"
     t.index ["hanzi"], name: "index_formulas_on_hanzi"
     t.index ["name"], name: "index_formulas_on_name"
-    t.index ["name"], name: "index_formulas_on_name_gin", using: :gin
     t.index ["pinyin"], name: "index_formulas_on_pinyin"
-    t.index ["pinyin"], name: "index_formulas_on_pinyin_gin", using: :gin
   end
 
   create_table "herb_action_annotations", force: :cascade do |t|
@@ -191,7 +183,6 @@ ActiveRecord::Schema.define(version: 2021_01_26_014731) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["name"], name: "index_herb_action_types_on_name"
-    t.index ["name"], name: "index_herb_action_types_on_name_gin", using: :gin
   end
 
   create_table "herb_actions", force: :cascade do |t|
@@ -209,7 +200,6 @@ ActiveRecord::Schema.define(version: 2021_01_26_014731) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["name"], name: "index_herb_categories_on_name"
-    t.index ["name"], name: "index_herb_categories_on_name_gin", using: :gin
   end
 
   create_table "herb_combination_herbs", force: :cascade do |t|
@@ -260,7 +250,6 @@ ActiveRecord::Schema.define(version: 2021_01_26_014731) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["herb_id"], name: "index_herb_notes_on_herb_id"
-    t.index ["note"], name: "index_herb_notes_on_note_gin", using: :gin
   end
 
   create_table "herb_properties", force: :cascade do |t|
@@ -312,15 +301,12 @@ ActiveRecord::Schema.define(version: 2021_01_26_014731) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["common_english"], name: "index_herbs_on_common_english"
-    t.index ["common_english"], name: "index_herbs_on_common_english_gin", using: :gin
     t.index ["hanzi"], name: "index_herbs_on_hanzi"
     t.index ["herb_category_id"], name: "index_herbs_on_herb_category_id"
     t.index ["latin"], name: "index_herbs_on_latin"
     t.index ["name"], name: "index_herbs_on_name"
-    t.index ["name"], name: "index_herbs_on_name_gin", using: :gin
     t.index ["pharm_latin"], name: "index_herbs_on_pharm_latin"
     t.index ["pinyin"], name: "index_herbs_on_pinyin"
-    t.index ["pinyin"], name: "index_herbs_on_pinyin_gin", using: :gin
   end
 
   create_table "precedence_types", force: :cascade do |t|
@@ -343,7 +329,6 @@ ActiveRecord::Schema.define(version: 2021_01_26_014731) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["name"], name: "index_syndromes_on_name"
-    t.index ["name"], name: "index_syndromes_on_name_gin", using: :gin
   end
 
   create_table "users", force: :cascade do |t|

@@ -11,8 +11,7 @@
 #
 # Indexes
 #
-#  index_conditions_on_name      (name)
-#  index_conditions_on_name_gin  (name) USING gin
+#  index_conditions_on_name  (name)
 #
 class Condition < ApplicationRecord
   has_many :formula_conditions
