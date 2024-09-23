@@ -1,6 +1,4 @@
 # frozen_string_literal: true
 
-require_relative 'loader/loader'
-
-loader = Loader::Main.new
+loader = Loader::MainLoader.new
 loader.load

@@ -12,8 +12,7 @@
 #
 # Indexes
 #
-#  index_herb_notes_on_herb_id   (herb_id)
-#  index_herb_notes_on_note_gin  (note) USING gin
+#  index_herb_notes_on_herb_id  (herb_id)
 #
 # Foreign Keys
 #

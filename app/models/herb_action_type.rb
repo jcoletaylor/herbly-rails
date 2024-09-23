@@ -12,8 +12,7 @@
 #
 # Indexes
 #
-#  index_herb_action_types_on_name      (name)
-#  index_herb_action_types_on_name_gin  (name) USING gin
+#  index_herb_action_types_on_name  (name)
 #
 class HerbActionType < ApplicationRecord
   validates :name, presence: true, uniqueness: true
