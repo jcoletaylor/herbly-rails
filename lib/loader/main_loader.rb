@@ -7,6 +7,11 @@ module Loader
   class MainLoader
     attr_accessor :herb_directory_path, :formula_directory_path
 
+    def self.load
+      loader = MainLoader.new
+      loader.load
+    end
+
     def initialize
       self.herb_directory_path = File.join(Rails.root, 'db/data/herbs')
       self.formula_directory_path = File.join(Rails.root, 'db/data/formulas')
