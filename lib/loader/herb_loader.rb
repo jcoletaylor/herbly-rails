@@ -50,12 +50,7 @@ module Loader
           properties.each do |property|
             next if property.blank?
 
-            HerbProperty.find_or_create_by!({
-                                              herb: herb,
-                property: property,
-                herb_property_type: property_type,
-                precedence_type: precedence_type
-                                            })
+            HerbProperty.find_or_create_by!({ herb:, property:, herb_property_type: property_type, precedence_type: })
           end
         end
       end
@@ -71,7 +66,7 @@ module Loader
         next if dosage.blank?
 
         herb_dosage_type = HerbDosageType.find_or_create_by!({ name: dose_type.to_s })
-        HerbDosage.find_or_create_by!({ herb: herb, dosage: dosage, herb_dosage_type: herb_dosage_type })
+        HerbDosage.find_or_create_by!({ herb:, dosage:, herb_dosage_type: })
       end
     end
 
@@ -89,13 +84,13 @@ module Loader
         next if action.blank?
 
         herb_action_type = HerbActionType.find_or_create_by!({ name: action })
-        herb_action = HerbAction.find_or_create_by!({ herb: herb, herb_action_type: herb_action_type })
+        herb_action = HerbAction.find_or_create_by!({ herb:, herb_action_type: })
         annotations = action_set[:action][:annotations]
         if annotations.present?
           annotations.each do |annotation|
             next if annotation.blank?
 
-            HerbActionAnnotation.find_or_create_by!({ herb_action: herb_action, annotation: annotation })
+            HerbActionAnnotation.find_or_create_by!({ herb_action:, annotation: })
           end
         end
         indications = action_set[:indications]
@@ -104,7 +99,7 @@ module Loader
         indications.each do |indication|
           next if indication.blank?
 
-          HerbActionIndication.find_or_create_by!({ herb_action: herb_action, indication: indication })
+          HerbActionIndication.find_or_create_by!({ herb_action:, indication: })
         end
       end
     end
@@ -113,13 +108,13 @@ module Loader
       warning_types = %i[contraindications incompatibilities interactions]
       warning_types.each do |warning_type|
         warnings = data[:contra][warning_type]
-        next unless warnings&.present?
+        next if warnings.blank?
 
         warnings.each do |warning|
           next if warning.blank?
 
           herb_warning_type = HerbWarningType.find_or_create_by!({ name: warning_type.to_s.singularize })
-          HerbWarning.find_or_create_by!({ herb: herb, herb_warning_type: herb_warning_type, warning: warning })
+          HerbWarning.find_or_create_by!({ herb:, herb_warning_type:, warning: })
         end
       end
     end
@@ -137,7 +132,7 @@ module Loader
         related_herbs = combination[:related_herbs].dup
         related_herbs << herb.name
         description = related_herbs.join('+')
-        herb_combination = HerbCombination.find_or_create_by!({ description: description })
+        herb_combination = HerbCombination.find_or_create_by!({ description: })
         related_herbs.each do |related_herb_name|
           # we are just acknowledging we have to run seed twice here
           # to make sure all the herbs are loaded first
@@ -145,15 +140,15 @@ module Loader
           related_herb = Herb.where({ name: related_herb_name }).first
           next unless related_herb
 
-          HerbCombinationHerb.find_or_create_by!({ herb: related_herb, herb_combination: herb_combination })
+          HerbCombinationHerb.find_or_create_by!({ herb: related_herb, herb_combination: })
         end
         use_cases = combination[:use_cases]
         next if use_cases.blank?
 
         combination[:use_cases].each do |use_case|
-          next unless use_case&.present?
+          next if use_case.blank?
 
-          HerbCombinationUseCase.find_or_create_by!({ herb_combination: herb_combination, use_case: use_case })
+          HerbCombinationUseCase.find_or_create_by!({ herb_combination:, use_case: })
         end
       end
     end
@@ -164,10 +159,7 @@ module Loader
 
       notes.reject!(&:blank?)
       notes.each do |note|
-        HerbNote.find_or_create_by!({
-                                      herb: herb,
-            note: note
-                                    })
+        HerbNote.find_or_create_by!({ herb:, note: })
       end
     end
   end

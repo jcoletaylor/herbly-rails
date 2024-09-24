@@ -2,7 +2,7 @@
 
 require 'rails_helper'
 
-RSpec.describe FormulasController, type: :routing do
+RSpec.describe FormulasController do
   describe 'routing' do
     it 'routes to #index' do
       expect(get: '/formulas').to route_to('formulas#index')

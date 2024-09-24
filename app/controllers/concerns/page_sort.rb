@@ -8,11 +8,11 @@ module PageSort
     limit = request.params[:limit] || 20
     offset = request.params[:offset] || 0
     sort_by = request.params[:sort_by] ? request.params[:sort_by].to_sym : :created_at
-    sort_by = :created_at unless valid_sorts.include?(sort_by)
+    sort_by = :created_at if valid_sorts.exclude?(sort_by)
     sort_order = request.params[:sort_order] ? request.params[:sort_order].to_sym : :asc
-    sort_order = :asc unless %i[asc desc].include?(sort_order)
+    sort_order = :asc if %i[asc desc].exclude?(sort_order)
     order = { sort_by => sort_order }
-    @page_sort_params = { limit: limit, offset: offset, order: order }
+    @page_sort_params = { limit:, offset:, order: }
   end
 
   def page_sort_params

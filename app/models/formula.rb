@@ -6,6 +6,8 @@
 #
 #  id             :bigint           not null, primary key
 #  common_english :string
+#  document       :text
+#  embedding      :vector(1536)
 #  english        :string
 #  hanzi          :string
 #  name           :string           not null
@@ -22,6 +24,11 @@
 #  index_formulas_on_pinyin          (pinyin)
 #
 class Formula < ApplicationRecord
+  vectorsearch
+
+  before_save :build_document
+  after_save :upsert_to_vectorsearch
+
   validates :name, presence: true, uniqueness: true
 
   has_many :formula_also_knowns
@@ -42,4 +49,12 @@ class Formula < ApplicationRecord
   has_many :symptoms, through: :formula_manifestation_symptoms
   has_many :formula_modification_sets
   has_many :formula_modifications, through: :formula_modification_sets
+
+  def as_vector
+    to_json({ name:, pinyin:, english:, common_english:, hanzi:, document: })
+  end
+
+  def build_document
+    self.document = FormulaDocumentGenerator.new(self).generate
+  end
 end
