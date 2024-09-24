@@ -2,7 +2,7 @@
 
 require 'rails_helper'
 
-RSpec.describe HerbsController, type: :routing do
+RSpec.describe HerbsController do
   describe 'routing' do
     it 'routes to #index' do
       expect(get: '/herbs').to route_to('herbs#index')

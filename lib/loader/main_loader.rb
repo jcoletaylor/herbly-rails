@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
-require_relative 'herb_loader'
 require_relative 'formula_loader'
+require_relative 'herb_loader'
 
 module Loader
   class MainLoader
@@ -13,8 +13,8 @@ module Loader
     end
 
     def initialize
-      self.herb_directory_path = File.join(Rails.root, 'db/data/herbs')
-      self.formula_directory_path = File.join(Rails.root, 'db/data/formulas')
+      self.herb_directory_path = Rails.root.join('db/data/herbs')
+      self.formula_directory_path = Rails.root.join('db/data/formulas')
       @herb_loader = Loader::HerbLoader.new(herb_directory_path)
       @formula_loader = Loader::FormulaLoader.new(formula_directory_path)
     end

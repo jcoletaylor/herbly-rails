@@ -2,7 +2,7 @@
 
 require 'rails_helper'
 
-RSpec.describe 'Herbs', type: :request do
+RSpec.describe 'Herbs' do
   before(:all) do
     @herb_names = %w[GanCao RenShen DangShen GuiZhi ShengDiHuang MaiMenDong EJiao HuoMaRen ShengJiang DaZao ZhiFuZi]
     loader = Loader::MainLoader.new
@@ -10,23 +10,25 @@ RSpec.describe 'Herbs', type: :request do
       loader.load_one_herb(herb_name)
     end
   end
+
   describe 'GET /herbs' do
-    it 'should be able to get herbs with a valid response' do
+    it 'is able to get herbs with a valid response' do
       get herbs_url(limit: 100), as: :json
       expect(response).to have_http_status(:success)
       expect(response.content_type).to match(a_string_including('application/json'))
-      json_response = JSON.parse(response.body).deep_symbolize_keys
+      json_response = response.parsed_body.deep_symbolize_keys
       response_herb_names = json_response[:data].pluck(:name)
       expect(response_herb_names).to include(*@herb_names)
     end
   end
+
   describe 'GET /herbs/:id' do
-    it 'should be able to get a single herb with a valid response' do
+    it 'is able to get a single herb with a valid response' do
       herb = Herb.first
       get herb_url(herb), as: :json
       expect(response).to have_http_status(:success)
       expect(response.content_type).to match(a_string_including('application/json'))
-      json_response = JSON.parse(response.body).deep_symbolize_keys
+      json_response = response.parsed_body.deep_symbolize_keys
       response_herb_name = json_response[:name]
       expect(@herb_names).to include(response_herb_name)
     end

@@ -42,5 +42,4 @@ class Herb < ApplicationRecord
   has_many :herb_combinations, through: :herb_combination_herbs
 
   validates :name, presence: true, uniqueness: true
-  validates :herb_category, presence: true
 end

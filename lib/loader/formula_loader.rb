@@ -34,7 +34,7 @@ module Loader
       data[:names][:aka].each do |aka|
         next if aka.blank?
 
-        FormulaAlsoKnown.find_or_create_by!({ formula: formula, name: aka })
+        FormulaAlsoKnown.find_or_create_by!({ formula:, name: aka })
       end
     end
 
@@ -46,12 +46,12 @@ module Loader
           herb = Herb.find_or_create_by!({ name: herb_association[:herb], herb_category: category })
         end
         dosage = herb_association[:dosage].blank? ? 'unknown' : herb_association[:dosage]
-        formula_herb = FormulaHerb.find_or_create_by!({ herb: herb, formula: formula, dosage: dosage })
+        formula_herb = FormulaHerb.find_or_create_by!({ herb:, formula:, dosage: })
         herb_association[:actions].each do |action|
           next if action.blank?
 
           named_action = FormulaNamedAction.find_or_create_by!({ name: action })
-          FormulaHerbAction.find_or_create_by!({ formula_herb: formula_herb, formula_named_action: named_action })
+          FormulaHerbAction.find_or_create_by!({ formula_herb:, formula_named_action: named_action })
         end
       end
     end
@@ -61,7 +61,7 @@ module Loader
         next if action.blank?
 
         named_action = FormulaNamedAction.find_or_create_by!({ name: action })
-        FormulaAction.find_or_create_by!({ formula: formula, formula_named_action: named_action })
+        FormulaAction.find_or_create_by!({ formula:, formula_named_action: named_action })
       end
     end
 
@@ -70,7 +70,7 @@ module Loader
         next if syndrome_name.blank?
 
         syndrome = Syndrome.find_or_create_by!({ name: syndrome_name })
-        FormulaSyndrome.find_or_create_by!({ syndrome: syndrome, formula: formula })
+        FormulaSyndrome.find_or_create_by!({ syndrome:, formula: })
       end
     end
 
@@ -78,17 +78,12 @@ module Loader
       tongue = data[:manifestations][:tongue] || 'unknown'
       tongue_coat = data[:manifestations][:tongue_coat] || 'unknown'
       pulse = data[:manifestations][:pulse] || 'unknown'
-      manifestation = FormulaManifestation.find_or_create_by!({
-                                                                formula: formula,
-          tongue: tongue,
-          tongue_coat: tongue_coat,
-          pulse: pulse
-                                                              })
+      manifestation = FormulaManifestation.find_or_create_by!({ formula:, tongue:, tongue_coat:, pulse: })
       data[:manifestations][:symptoms].each do |symptom_name|
         next if symptom_name.blank?
 
         symptom = Symptom.find_or_create_by!({ name: symptom_name })
-        FormulaManifestationSymptom.find_or_create_by!({ formula_manifestation: manifestation, symptom: symptom })
+        FormulaManifestationSymptom.find_or_create_by!({ formula_manifestation: manifestation, symptom: })
       end
     end
 
@@ -97,7 +92,7 @@ module Loader
         next if condition_name[:name].blank?
 
         condition = Condition.find_or_create_by!({ name: condition_name[:name] })
-        FormulaCondition.find_or_create_by!({ formula: formula, condition: condition })
+        FormulaCondition.find_or_create_by!({ formula:, condition: })
       end
     end
 
@@ -105,7 +100,7 @@ module Loader
       data[:contra][:contraindications].each do |item|
         next if item.blank?
 
-        FormulaContraindication.find_or_create_by!({ formula: formula, contraindication: item })
+        FormulaContraindication.find_or_create_by!({ formula:, contraindication: item })
       end
     end
 
@@ -113,7 +108,7 @@ module Loader
       data[:contra][:interactions].each do |item|
         next if item.blank?
 
-        FormulaInteraction.find_or_create_by!({ formula: formula, interaction: item })
+        FormulaInteraction.find_or_create_by!({ formula:, interaction: item })
       end
     end
 
@@ -121,7 +116,7 @@ module Loader
       data[:notes].each do |item|
         next if item.blank?
 
-        FormulaNote.find_or_create_by!({ formula: formula, note: item })
+        FormulaNote.find_or_create_by!({ formula:, note: item })
       end
     end
 
@@ -130,7 +125,7 @@ module Loader
         purpose = mod_set[:purpose]
         next if purpose.blank?
 
-        formula_modification_set = FormulaModificationSet.find_or_create_by!({ formula: formula, purpose: purpose })
+        formula_modification_set = FormulaModificationSet.find_or_create_by!({ formula:, purpose: })
         mod_set[:modifications].each do |mod|
           next if mod[:herb].blank? || mod[:modification].blank?
 
@@ -139,11 +134,7 @@ module Loader
             category = HerbCategory.find_or_create_by!({ name: 'unknown' })
             herb = Herb.find_or_create_by!({ name: mod[:herb], herb_category: category })
           end
-          FormulaModification.find_or_create_by!({
-                                                   formula_modification_set: formula_modification_set,
-              herb: herb,
-              modification: mod[:modification]
-                                                 })
+          FormulaModification.find_or_create_by!({ formula_modification_set:, herb:, modification: mod[:modification] })
         end
       end
     end
