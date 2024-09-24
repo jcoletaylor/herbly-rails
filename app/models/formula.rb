@@ -51,7 +51,7 @@ class Formula < ApplicationRecord
   has_many :formula_modifications, through: :formula_modification_sets
 
   def as_vector
-    { name:, pinyin:, english:, common_english:, hanzi:, document: }
+    to_json({ name:, pinyin:, english:, common_english:, hanzi:, document: })
   end
 
   def build_document
