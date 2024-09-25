@@ -1,0 +1,80 @@
+# <%= @formula.name_capitalized %>
+
+## Names
+
+<%= @formula.name_capitalized %> is a Chinese herbal formula that has been used for centuries to treat a variety of conditions.
+<%= "#{@formula.name_capitalized} is also known as #{@formula.english}, #{@formula.common_english}, #{@formula.hanzi}, #{@formula.formula_also_knowns.map(&:name).join(', ')}" %>
+Chinese medicine herbal formulas have ingredients (herbs), they have actions, they treat symptoms, syndromes, and conditions, and they have contraindications and interactions. They also have notes and manifestations.
+<%= @formula.name_capitalized %> is outlines below in detail with all of its components.
+
+## <%= "#{@formula.name_capitalized} Actions" %>
+
+<% @formula.formula_named_actions.each do |fna| %>
+* <%= fna.name %>
+<% end %>
+
+## <%= "#{@formula.name_capitalized} Symptoms Treated" %>
+
+<% formula.symptoms.each do |s| %>
+* <%= s.name %>
+<% end %>
+
+## <%= "#{@formula.name_capitalized} Syndromes Treated" %>
+
+<% formula.formula_syndromes.each do |fs| %>
+* <%= fs.syndrome_name %>
+<% end %>
+
+## <%= "#{@formula.name_capitalized} Conditions Treated" %>
+
+<% formula.conditions.each do |c| %>
+* <%= c.name %>
+<% end %>
+
+<% if formula.formula_manifestation %>
+## <%= "#{formula.name_capitalized} Manifestations" %>
+
+* Pulse: <%= formula.formula_manifestation.pulse %>
+* Tongue: <%= formula.formula_manifestation.tongue %>
+* Tongue Coat: <%= formula.formula_manifestation.tongue_coat %>
+<% end %>
+
+## <%= "#{@formula.name_capitalized} Contraindications" %>
+
+<% formula.formula_contraindications.each do |c| %>
+* <%= c.contraindication %>
+<% end %>
+
+## <%= "#{@formula.name_capitalized} Interactions" %>
+
+<% formula.formula_interactions.each do |i| %>
+* <%= i.interaction %>
+<% end %>
+
+## <%= "#{@formula.name_capitalized} Notes" %>
+
+<% formula.formula_notes.each do |n| %>
+* <%= n.note %>
+<% end %>
+
+## <%= "#{formula.name_capitalized} Ingredients (Herbs)" %>
+
+<% formula.herbs.each do |herb| %>
+### <%= "#{herb.pinyin}" %>
+
+* Ingredient Names: <%= "#{herb.common_english}, #{herb.hanzi}, #{herb.latin}, #{herb.pharm_latin}" %>
+* Category: <%= "#{herb.herb_category.name}, #{herb.herb_category.description}" %>
+* <%= "#{herb.name_capitalized}" %> Actions in <%= "#{@formula.name_capitalized}" %>
+<%  formula.formula_herb_actions.where(formula_herb_id: herb.id).each do |fha| %>
+    * dosage at <%= "#{fha.formula_herb.dosage}: #{fha.action_name}" %>
+<%  end %>
+<% end %>
+
+## <%= "#{@formula.name_capitalized} Modifications" %>
+
+<% formula.formula_modification_sets.each do |fms| %>
+* Modify as follows in order to treat <%= "#{fms.purpose}" %>
+<%   fms.formula_modifications.each do |fm| %>
+    * <%= "#{fm.modification}" %>
+<%   end %>
+<% end %>

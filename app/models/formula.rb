@@ -51,10 +51,14 @@ class Formula < ApplicationRecord
   has_many :formula_modifications, through: :formula_modification_sets
 
   def as_vector
-    to_json({ name:, pinyin:, english:, common_english:, hanzi:, document: })
+    document
   end
 
   def build_document
     self.document = FormulaDocumentGenerator.new(self).generate
+  end
+
+  def name_capitalized
+    @name_capitalized ||= name.split.map(&:capitalize).join(' ')
   end
 end
