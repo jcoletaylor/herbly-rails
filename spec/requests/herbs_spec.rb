@@ -3,7 +3,7 @@
 require 'rails_helper'
 
 RSpec.describe 'Herbs' do
-  before(:all) do
+  def load_herbs
     @herb_names = %w[GanCao RenShen DangShen GuiZhi ShengDiHuang MaiMenDong EJiao HuoMaRen ShengJiang DaZao ZhiFuZi]
     loader = Loader::MainLoader.new
     @herb_names.each do |herb_name|
@@ -13,6 +13,7 @@ RSpec.describe 'Herbs' do
 
   describe 'GET /herbs' do
     it 'is able to get herbs with a valid response' do
+      load_herbs
       get herbs_url(limit: 100), as: :json
       expect(response).to have_http_status(:success)
       expect(response.content_type).to match(a_string_including('application/json'))
@@ -24,6 +25,7 @@ RSpec.describe 'Herbs' do
 
   describe 'GET /herbs/:id' do
     it 'is able to get a single herb with a valid response' do
+      load_herbs
       herb = Herb.first
       get herb_url(herb), as: :json
       expect(response).to have_http_status(:success)

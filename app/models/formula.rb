@@ -57,4 +57,8 @@ class Formula < ApplicationRecord
   def build_document
     self.document = FormulaDocumentGenerator.new(self).generate
   end
+
+  def name_capitalized
+    @name_capitalized ||= name.split.map(&:capitalize).join(' ')
+  end
 end
